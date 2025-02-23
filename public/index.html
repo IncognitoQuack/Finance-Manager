@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Personal Finance Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- FontAwesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-..."
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-piggy-bank fa-2x"></i>
+      <span class="brand-name">FinancePro</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#analytics-section">
+        <i class="fa-solid fa-calculator"></i>
+        <span>Analytics</span>
+      </a>
+      <a href="#" id="export-link">
+        <i class="fa-solid fa-file-export"></i>
+        <span>Export</span>
+      </a>
+      <a href="#" id="import-link">
+        <i class="fa-solid fa-file-import"></i>
+        <span>Import</span>
+      </a>
+      <a href="#" id="pdf-link">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>PDF</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="welcome-text">
+        <h1>Welcome back, <span>User</span>!</h1>
+        <p>Monitor and analyze your finances in one place.</p>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="theme-toggle">
+        <label class="switch">
+          <input type="checkbox" id="theme-switch" />
+          <span class="slider"></span>
+        </label>
+        <span class="theme-label">Dark Mode</span>
+      </div>
+    </header>
+
+    <!-- Overview Cards -->
+    <section class="overview-cards">
+      <div class="card overview-card income-card">
+        <h2>Total Income</h2>
+        <p id="total-income">$0</p>
+      </div>
+      <div class="card overview-card expense-card">
+        <h2>Total Expenses</h2>
+        <p id="total-expenses">$0</p>
+      </div>
+      <div class="card overview-card balance-card">
+        <h2>Net Balance</h2>
+        <p id="net-balance">$0</p>
+      </div>
+    </section>
+
+    <!-- Charts Row -->
+    <section class="charts-row">
+      <div class="chart-card">
+        <h3>Spending by Category</h3>
+        <canvas id="financeChart" width="400" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Monthly Totals</h3>
+        <canvas id="financeChart2" width="400" height="200"></canvas>
+      </div>
+    </section>
+
+    <!-- Filter & Search -->
+    <section class="filter-search-section">
+      <div class="filter-group">
+        <label for="filter-type">Type:</label>
+        <select id="filter-type">
+          <option value="">All</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-category">Category:</label>
+        <input type="text" id="filter-category" placeholder="e.g. Groceries" />
+      </div>
+      <div class="filter-group">
+        <label for="search-input">Search Title/Notes:</label>
+        <input type="text" id="search-input" placeholder="Search..." />
+      </div>
+      <button id="apply-filters-btn">Apply</button>
+      <button id="clear-filters-btn">Clear</button>
+    </section>
+
+    <!-- Table & Form Container -->
+    <section class="table-form-container">
+      <!-- Records Table -->
+      <div class="records-card">
+        <h2>All Finance Records</h2>
+        <table id="finance-table">
+          <thead>
+            <tr>
+              <th data-sort="title">Title <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="amount">Amount <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="category">Category <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="type">Type <i class="fa-solid fa-sort"></i></th>
+              <th data-sort="date">Date <i class="fa-solid fa-sort"></i></th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody><!-- Populated by script.js --></tbody>
+        </table>
+      </div>
+
+      <!-- Add Record Form -->
+      <div class="form-card">
+        <h2>Add Finance Record</h2>
+        <form id="finance-form">
+          <input type="text" id="title" placeholder="Title" required />
+          <input type="number" id="amount" placeholder="Amount" required />
+          <input type="text" id="category" placeholder="Category" required />
+          <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <input type="date" id="date" />
+          <textarea id="notes" placeholder="Notes (optional)"></textarea>
+          <button type="submit">Add Record</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <section class="actions-section">
+      <button id="export-json-btn">
+        <i class="fa-solid fa-file-export"></i> Export JSON
+      </button>
+      <input type="file" id="import-json-file" accept=".json" style="display:none" />
+      <button id="import-json-btn">
+        <i class="fa-solid fa-file-import"></i> Import JSON
+      </button>
+      <button id="pdf-report-btn">
+        <i class="fa-solid fa-file-pdf"></i> Generate PDF Report
+      </button>
+    </section>
+
+    <!-- Analytics Section -->
+    <section class="analytics-section" id="analytics-section">
+      <h2>Advanced Analytics</h2>
+      <div class="analytics-controls">
+        <label for="calc-start-date">Start Date:</label>
+        <input type="date" id="calc-start-date" />
+        <label for="calc-end-date">End Date:</label>
+        <input type="date" id="calc-end-date" />
+        <button id="calc-btn">Calculate</button>
+      </div>
+      <div class="analytics-results">
+        <div class="analytics-card">
+          <h3>Average Income</h3>
+          <p id="avg-income">$0</p>
+        </div>
+        <div class="analytics-card">
+          <h3>Average Expense</h3>
+          <p id="avg-expense">$0</p>
+        </div>
+        <div class="analytics-card">
+          <h3>Largest Income</h3>
+          <p id="largest-income">$0</p>
+        </div>
+        <div class="analytics-card">
+          <h3>Largest Expense</h3>
+          <p id="largest-expense">$0</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Edit Modal (hidden by default) -->
+  <div class="modal" id="edit-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Edit Record</h2>
+      <form id="edit-form">
+        <input type="hidden" id="edit-id" />
+        <input type="text" id="edit-title" placeholder="Title" required />
+        <input type="number" id="edit-amount" placeholder="Amount" required />
+        <input type="text" id="edit-category" placeholder="Category" required />
+        <select id="edit-type">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+        <input type="date" id="edit-date" />
+        <textarea id="edit-notes" placeholder="Notes (optional)"></textarea>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

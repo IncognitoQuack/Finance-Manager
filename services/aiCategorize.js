@@ -1,25 +1,45 @@
 // services/aiCategorize.js
 
-/**
- * Example naive approach:
- * - If title or notes contain certain keywords -> guess category
- * - Real version might use a trained model or a third-party service
- */
+// Define categories and keywords
+const categoryKeywords = {
+  Groceries: ['grocery', 'supermarket', 'aldi', 'walmart', 'food', 'market'],
+  Housing: ['rent', 'mortgage', 'apartment', 'lease'],
+  Utilities: ['electric', 'water', 'gas', 'internet', 'phone', 'utility'],
+  Transport: ['uber', 'taxi', 'bus', 'train', 'fuel', 'gas station'],
+  Entertainment: ['movie', 'cinema', 'netflix', 'concert', 'theater'],
+  Health: ['doctor', 'hospital', 'pharmacy', 'medicine', 'clinic'],
+  Education: ['school', 'college', 'tuition', 'books'],
+  Dining: ['restaurant', 'dine', 'dinner', 'lunch', 'breakfast'],
+  // Add more categories and keywords as needed
+};
+
 function autoCategorize(record) {
-    const title = record.title.toLowerCase();
-  
-    if (title.includes('grocery') || title.includes('supermarket')) {
-      return 'Groceries';
+  // Combine title + notes into one searchable string
+  const text = (record.title + ' ' + (record.notes || '')).toLowerCase();
+
+  let bestCategory = 'Other';
+  let maxScore = 0;
+
+  // Check each category’s keywords
+  for (const category in categoryKeywords) {
+    const keywords = categoryKeywords[category];
+    let score = 0;
+
+    // Count how many keywords match
+    keywords.forEach((keyword) => {
+      if (text.includes(keyword)) {
+        score++;
+      }
+    });
+
+    // Pick the category with the highest keyword hits
+    if (score > maxScore) {
+      bestCategory = category;
+      maxScore = score;
     }
-    if (title.includes('rent') || title.includes('mortgage')) {
-      return 'Housing';
-    }
-    if (title.includes('uber') || title.includes('taxi')) {
-      return 'Transport';
-    }
-    // fallback
-    return 'Other';
   }
-  
-  module.exports = { autoCategorize };
-  
+
+  return bestCategory;
+}
+
+module.exports = { autoCategorize };

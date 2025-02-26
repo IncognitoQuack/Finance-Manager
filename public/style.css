@@ -357,6 +357,8 @@ input:checked + .slider:before {
   border-radius: var(--border-radius);
   overflow-x: auto;
   box-shadow: var(--box-shadow);
+  margin: 1px;
+  height: 425px;
 }
 
 .records-card h2 {
@@ -585,4 +587,133 @@ body.dark-theme #finance-table td {
 }
 .close-modal:hover {
   color: var(--accent-color);
+}
+
+
+/* Add this snippet on top of your existing style.css or at the bottom
+   to enhance the Edit and Delete buttons in the Actions column */
+
+/* Buttons in the table Actions column */
+#finance-table td button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  margin: 0 0.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 10px;
+  margin-right: 10px;
+}
+
+#finance-table td button:hover {
+  background: #5b52d7;
+  transform: scale(1.03);
+}
+
+/* Specific style for the "Delete" button (red) */
+#finance-table td button.delete-btn {
+  background: #f44336;
+  margin-right: 10px;
+}
+#finance-table td button.delete-btn:hover {
+  background: #d32f2f;
+}
+
+
+/* ADD THIS TO YOUR EXISTING style.css (AT THE BOTTOM OR TOP-UP) */
+/* 1) Better styling for Edit and Delete buttons */
+#finance-table td button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  margin: 0 0.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+#finance-table td button:hover {
+  background: #5b52d7;
+  transform: scale(1.03);
+}
+
+#finance-table td .delete-btn {
+  background: #f44336;
+}
+#finance-table td .delete-btn:hover {
+  background: #d32f2f;
+}
+
+/* 2) Basic styling for new Calculations section */
+.calculations-section {
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+.calculations-section h2 {
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.calc-item {
+  background: var(--bg-highlight);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--box-shadow);
+}
+
+.calc-item h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.calc-item label {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}
+
+.calc-item input,
+.calc-item textarea {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid transparent;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: var(--text-main);
+  margin-top: 0.3rem;
+}
+
+.calc-item button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.calc-item button:hover {
+  background: #5b52d7;
+  transform: scale(1.03);
+}
+
+.calc-item p {
+  margin-top: 0.5rem;
+  color: var(--text-main);
 }

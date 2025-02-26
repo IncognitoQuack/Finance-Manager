@@ -1,0 +1,123 @@
+[
+    {
+      "title": "Initial Investment",
+      "amount": 5000,
+      "category": "Investments",
+      "date": "2025-01-01T09:00:00.000Z",
+      "type": "income",
+      "notes": "Seed capital from investor"
+    },
+    {
+      "title": "Office Supplies",
+      "amount": 120,
+      "category": "Office",
+      "date": "2025-01-03T11:30:00.000Z",
+      "type": "expense",
+      "notes": "Printer ink and paper"
+    },
+    {
+      "title": "Client Payment",
+      "amount": 2000,
+      "category": "Freelance",
+      "date": "2025-01-05T14:00:00.000Z",
+      "type": "income",
+      "notes": "Website design project"
+    },
+    {
+      "title": "Rent",
+      "amount": 1000,
+      "category": "Housing",
+      "date": "2025-01-10T09:00:00.000Z",
+      "type": "expense",
+      "notes": "Monthly office rent"
+    },
+    {
+      "title": "Software Purchase",
+      "amount": 300,
+      "category": "Tech",
+      "date": "2025-01-12T10:45:00.000Z",
+      "type": "expense",
+      "notes": "Accounting software license"
+    },
+    {
+      "title": "Marketing Campaign",
+      "amount": 500,
+      "category": "Marketing",
+      "date": "2025-01-15T16:30:00.000Z",
+      "type": "expense",
+      "notes": "Social media ads"
+    },
+    {
+      "title": "Freelance Project",
+      "amount": 1500,
+      "category": "Freelance",
+      "date": "2025-01-18T08:15:00.000Z",
+      "type": "income",
+      "notes": "Mobile app UI/UX work"
+    },
+    {
+      "title": "Team Lunch",
+      "amount": 80,
+      "category": "Dining",
+      "date": "2025-01-20T12:00:00.000Z",
+      "type": "expense",
+      "notes": "Monthly team bonding lunch"
+    },
+    {
+      "title": "Online Course",
+      "amount": 200,
+      "category": "Education",
+      "date": "2025-01-22T14:45:00.000Z",
+      "type": "expense",
+      "notes": "Advanced coding course"
+    },
+    {
+      "title": "Monthly Salary",
+      "amount": 3000,
+      "category": "Salary",
+      "date": "2025-01-25T09:00:00.000Z",
+      "type": "income",
+      "notes": "Full-time job salary"
+    },
+    {
+      "title": "Utilities",
+      "amount": 250,
+      "category": "Utilities",
+      "date": "2025-01-27T10:00:00.000Z",
+      "type": "expense",
+      "notes": "Electricity, water, and internet"
+    },
+    {
+      "title": "Stock Dividend",
+      "amount": 180,
+      "category": "Investments",
+      "date": "2025-01-29T11:00:00.000Z",
+      "type": "income",
+      "notes": "Quarterly dividend from stocks"
+    },
+    {
+      "title": "Groceries",
+      "amount": 90,
+      "category": "Groceries",
+      "date": "2025-02-01T10:30:00.000Z",
+      "type": "expense",
+      "notes": "Office snacks and beverages"
+    },
+    {
+      "title": "Gym Membership",
+      "amount": 40,
+      "category": "Health",
+      "date": "2025-02-05T07:00:00.000Z",
+      "type": "expense",
+      "notes": "Monthly fitness subscription"
+    },
+    {
+      "title": "Rental Income",
+      "amount": 700,
+      "category": "Real Estate",
+      "date": "2025-02-08T13:00:00.000Z",
+      "type": "income",
+      "notes": "Sublet from unused office space"
+    }
+  ]
+  

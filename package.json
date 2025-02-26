@@ -1,7 +1,7 @@
 {
   "name": "personal-finance-manager",
   "version": "1.0.0",
-  "description": "Personal Finance Manager with improved UI & features",
+  "description": "Personal Finance Manager",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -14,6 +14,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.18.2",
     "mongoose": "^6.8.0",
+    "nodemailer": "^6.10.0",
     "pdfkit": "^0.13.0"
   }
 }

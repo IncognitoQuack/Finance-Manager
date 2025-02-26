@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Personal Finance Manager</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/11782/11782361.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Font -->
@@ -14,7 +15,6 @@
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-..."
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
@@ -51,6 +51,11 @@
       <a href="#" id="pdf-link">
         <i class="fa-solid fa-file-pdf"></i>
         <span>PDF</span>
+      </a>
+      <!-- New Nav Link for Calculations -->
+      <a href="#calculations-section">
+        <i class="fa-solid fa-calculator"></i>
+        <span>Calculations</span>
       </a>
     </nav>
   </aside>
@@ -146,7 +151,7 @@
       </div>
 
       <!-- Add Record Form -->
-      <div class="form-card">
+      <div class="form-card" style=" height: fit-content;">
         <h2>Add Finance Record</h2>
         <form id="finance-form">
           <input type="text" id="title" placeholder="Title" required />
@@ -169,9 +174,11 @@
         <i class="fa-solid fa-file-export"></i> Export JSON
       </button>
       <input type="file" id="import-json-file" accept=".json" style="display:none" />
+    
       <button id="import-json-btn">
         <i class="fa-solid fa-file-import"></i> Import JSON
       </button>
+      <span id="import-filename" style="margin-left: 1rem; color: var(--text-muted);"></span>
       <button id="pdf-report-btn">
         <i class="fa-solid fa-file-pdf"></i> Generate PDF Report
       </button>
@@ -204,6 +211,99 @@
           <h3>Largest Expense</h3>
           <p id="largest-expense">$0</p>
         </div>
+        <!-- New Additional Analytics -->
+        <div class="analytics-card">
+          <h3>Median Income</h3>
+          <p id="median-income">$0</p>
+        </div>
+        <div class="analytics-card">
+          <h3>Median Expense</h3>
+          <p id="median-expense">$0</p>
+        </div>
+        <div class="analytics-card">
+          <h3>Expense/Income Ratio</h3>
+          <p id="expense-ratio">0%</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Calculations Section -->
+    <section class="calculations-section" id="calculations-section">
+      <h2>Expert Financial Calculations</h2>
+
+      <!-- IRR Calculator -->
+      <div class="calc-item">
+        <h3>IRR Calculator (Long-Term Plan)</h3>
+        <p>Enter initial investment as negative, followed by yearly net cash flows (comma-separated):</p>
+        <textarea id="irr-cashflows" placeholder="-10000, 2000, 3000, 4000, 5000"></textarea>
+        <label>Inflation Rate (%):</label>
+        <input type="number" id="irr-inflation" placeholder="3" />
+        <button id="calc-irr-btn">Calculate IRR</button>
+        <p>Result: <span id="irr-result">N/A</span></p>
+        <p>Actual IRR (After Inflation): <span id="irr-actual-result">N/A</span></p>
+      </div>
+
+      <!-- Future Value (Lump Sum) -->
+      <div class="calc-item">
+        <h3>Future Value (Lump Sum)</h3>
+        <label>Present Value:</label>
+        <input type="number" id="fv-present" placeholder="1000" />
+        <label>Annual Interest Rate (%):</label>
+        <input type="number" id="fv-rate" placeholder="5" />
+        <label>Number of Years:</label>
+        <input type="number" id="fv-years" placeholder="10" />
+        <label>Inflation Rate (%):</label>
+        <input type="number" id="fv-inflation" placeholder="2" />
+        <button id="calc-fv-btn">Calculate FV</button>
+        <p>Result (Nominal FV): <span id="fv-result">N/A</span></p>
+        <p>Actual Value (After Inflation): <span id="fv-actual">N/A</span></p>
+      </div>
+
+      <!-- Future Value (Regular Intervals / SIP) -->
+      <div class="calc-item">
+        <h3>Future Value (Regular Intervals / SIP)</h3>
+        <label>Regular Contribution (per month):</label>
+        <input type="number" id="sip-amount" placeholder="200" />
+        <label>Annual Interest Rate (%):</label>
+        <input type="number" id="sip-rate" placeholder="6" />
+        <label>Number of Years:</label>
+        <input type="number" id="sip-years" placeholder="10" />
+        <label>Inflation Rate (%):</label>
+        <input type="number" id="sip-inflation" placeholder="2" />
+        <button id="calc-sip-btn">Calculate SIP FV</button>
+        <p>Result (Nominal FV): <span id="sip-result">N/A</span></p>
+        <p>Actual Value (After Inflation): <span id="sip-actual">N/A</span></p>
+        <p>Total Amount Invested (Nominal): <span id="sip-total-invested">N/A</span></p>
+        <p>Actual Amount Invested (After Inflation): <span id="sip-actual-invested">N/A</span></p>
+      </div>
+
+      <!-- Monthly Withdrawal Without Depleting Principal -->
+      <div class="calc-item">
+        <h3>Monthly Withdrawal (No Depletion)</h3>
+        <label>Principal (Lump Sum):</label>
+        <input type="number" id="withdraw-principal" placeholder="50000" />
+        <label>Annual Interest Rate (%):</label>
+        <input type="number" id="withdraw-rate" placeholder="4" />
+        <button id="calc-withdraw-btn">Calculate Monthly Withdrawal</button>
+        <p>Result: <span id="withdraw-result">N/A</span></p>
+      </div>
+
+      <!-- NEW: Corpus Sustainability -->
+      <div class="calc-item">
+        <h4>Corpus Sustainability</h4>
+        <label>Total Corpus:</label>
+        <input type="number" id="sustain-corpus" placeholder="100000" />
+        <label>Monthly Expense:</label>
+        <input type="number" id="sustain-expense" placeholder="2000" />
+        <label>Other Monthly Income (Optional):</label>
+        <input type="number" id="sustain-income" placeholder="0" />
+        <label>Annual Interest Rate (%):</label>
+        <input type="number" id="sustain-rate" placeholder="3" />
+        <label>Annual Inflation Rate (%):</label>
+        <input type="number" id="sustain-inflation" placeholder="2" />
+        <button id="calc-sustain-btn">Calculate Years of Sustainability</button>
+        <p>Corpus will sustain for: <span id="sustain-years">N/A</span> years</p>
+        <p>Actual Value (After Inflation Adjustments): <span id="sustain-actual">N/A</span></p>
       </div>
     </section>
   </div>

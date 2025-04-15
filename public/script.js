@@ -667,3 +667,174 @@ function computeSustainability(
   const years = months / 12;
   return { years, realValue };
 }
+
+
+const calcToggle = document.getElementById('calc-toggle-checkbox');
+  calcToggle.addEventListener('change', function () {
+    const calcSection = document.getElementById('calculations-section');
+    calcSection.style.display = this.checked ? 'block' : 'none';
+  });
+
+// Enhanced AI Data Analysis Feature with Refined Typewriter and Dynamic Chart Reveal
+document.getElementById('ai-calc-btn').addEventListener('click', runAIAnalysis);
+
+function runAIAnalysis() {
+  const typewriterElem = document.getElementById('ai-typewriter');
+  // Clear previous typewriter content and show the processing area
+  typewriterElem.innerHTML = "";
+  document.querySelector('.ai-processing').style.display = "block";
+
+  // Advanced AI/tech style messages (one-at-a-time)
+  const messages = [
+    "Initializing quantum financial analytics module...",
+    "Decrypting secured data streams...",
+    "Modern Portfolio Theory (MPT) algorithm engaged...",
+    "Loading advanced machine learning models...",
+    "Deploying blockchain-backed statistical algorithms...",
+    "The model is experiencing high demand (location: NYSE), prorating your request...",
+    "Calibrating high-frequency fiscal optimization routines..."
+  ];
+
+  // Typewriter effect: clear the element before typing each message,
+  // then wait, then clear again before the next message appears.
+  function typeWriter(text, element, delay, callback) {
+    element.innerHTML = ""; // clear previous text
+    let i = 0;
+    function writer() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(writer, delay);
+      } else {
+        // Wait, then clear for the next message
+        setTimeout(function() {
+          element.innerHTML = "";
+          if (callback) callback();
+        }, 1000);
+      }
+    }
+    writer();
+  }
+  
+  // Display messages sequentially
+  function displayMessages(index) {
+    if (index < messages.length) {
+      typeWriter(messages[index], typewriterElem, 40, function() {
+        setTimeout(function() {
+          displayMessages(index + 1);
+        }, 500);
+      });
+    } else {
+      // After all messages, hide the processing area and show the chart section
+      document.querySelector('.ai-processing').style.display = "none";
+      document.querySelector('.ai-chart-section').style.display = "block";
+      setTimeout(computeAIAnalysis, 500);
+    }
+  }
+  
+  displayMessages(0);
+}
+
+function computeAIAnalysis() {
+  // Retrieve records from the existing financeData array
+  const incomeRecords = financeData.filter(r => r.type === 'income');
+  const expenseRecords = financeData.filter(r => r.type === 'expense');
+  
+  const totalIncome = incomeRecords.reduce((sum, r) => sum + r.amount, 0);
+  const totalExpense = expenseRecords.reduce((sum, r) => sum + r.amount, 0);
+  const savings = totalIncome - totalExpense;
+  
+  const incomeArr = incomeRecords.map(r => r.amount);
+  const expenseArr = expenseRecords.map(r => r.amount);
+  const medianIncome = median(incomeArr);
+  const medianExpense = median(expenseArr);
+  
+  // Categorize expenses into essential vs. non-essential
+  const essentialKeywords = ["health", "groceries", "education", "rent", "utilities", "transportation"];
+  let essentialExpense = 0, nonEssentialExpense = 0;
+  let nonEssentialCategoriesSet = new Set();
+  expenseRecords.forEach(record => {
+    const category = record.category.toLowerCase();
+    const isEssential = essentialKeywords.some(keyword => category.includes(keyword));
+    if (isEssential) {
+      essentialExpense += record.amount;
+    } else {
+      nonEssentialExpense += record.amount;
+      nonEssentialCategoriesSet.add(record.category);
+    }
+  });
+  
+  // Compute ratios and key metrics
+  const expensePercent = totalIncome > 0 ? (totalExpense / totalIncome * 100) : 0;
+  const netSavingsRatio = totalIncome > 0 ? (savings / totalIncome * 100) : 0;
+  const essentialRatio = totalExpense > 0 ? (essentialExpense / totalExpense * 100) : 0;
+  const nonEssentialRatio = totalExpense > 0 ? (nonEssentialExpense / totalExpense * 100) : 0;
+  const financialHealthScore = netSavingsRatio * (1 - (nonEssentialRatio / 100));
+  
+  // Generate recommendation message based on the Financial Health Score
+  let healthMessage = "";
+  if (financialHealthScore > 20) {
+    healthMessage = "Excellent financial health.";
+  } else if (financialHealthScore > 10) {
+    healthMessage = "Good health, but improvements are possible.";
+  } else {
+    healthMessage = "Financial health is suboptimal—consider reducing non-essential spending.";
+  }
+  
+  // Update summary cards with computed values
+  document.getElementById('ai-total-income').innerText = `$${totalIncome.toFixed(2)}`;
+  document.getElementById('ai-total-expenses').innerText = `$${totalExpense.toFixed(2)}`;
+  document.getElementById('ai-savings').innerText = `$${savings.toFixed(2)}`;
+  document.getElementById('ai-median-income').innerText = `$${medianIncome.toFixed(2)}`;
+  document.getElementById('ai-median-expense').innerText = `$${medianExpense.toFixed(2)}`;
+  document.getElementById('ai-recommendation-message').innerHTML = healthMessage;
+  
+  // Build a radar chart for key financial metrics using Chart.js
+  const radarCtx = document.getElementById('ai-radar-chart').getContext('2d');
+  if(window.aiRadarChartInstance) {
+    window.aiRadarChartInstance.destroy();
+  }
+  window.aiRadarChartInstance = new Chart(radarCtx, {
+    type: 'radar',
+    data: {
+      labels: ['Net Savings %', 'Expense %', 'Essential %', 'Non-essential %', 'FHS'],
+      datasets: [{
+        label: 'Financial Metrics',
+        data: [
+          parseFloat(netSavingsRatio.toFixed(2)), 
+          parseFloat(expensePercent.toFixed(2)), 
+          parseFloat(essentialRatio.toFixed(2)), 
+          parseFloat(nonEssentialRatio.toFixed(2)), 
+          parseFloat(financialHealthScore.toFixed(2))
+        ],
+        backgroundColor: 'rgba(103, 58, 183, 0.2)',
+        borderColor: 'rgba(103, 58, 183, 1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(103, 58, 183, 1)'
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          angleLines: { display: true },
+          suggestedMin: 0,
+          suggestedMax: 100,
+          ticks: { backdropColor: 'transparent' }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: document.body.classList.contains('dark-theme') ? '#fff' : '#000' }
+        }
+      }
+    }
+  });
+}
+
+// Utility: Calculate median
+function median(values) {
+  if (!values || values.length === 0) return 0;
+  values.sort((a, b) => a - b);
+  const mid = Math.floor(values.length / 2);
+  return (values.length % 2 !== 0) ? values[mid] : (values[mid - 1] + values[mid]) / 2;
+}

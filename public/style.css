@@ -717,3 +717,126 @@ body.dark-theme #finance-table td {
   margin-top: 0.5rem;
   color: var(--text-main);
 }
+
+#calculations-toggle {
+  background: var(--bg-highlight);
+  color: var(--text-main);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background var(--transition-speed), transform var(--transition-speed);
+}
+#calculations-toggle:hover {
+  background: var(--accent-color);
+  color: #fff;
+  transform: scale(1.02);
+}
+
+/* ----------------------------
+   AI Data Analysis Section Styles (Enhanced)
+----------------------------- */
+.ai-data-analysis {
+  background: var(--bg-card);
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.ai-data-analysis h2 {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.ai-data-analysis button {
+  background: var(--accent-color);
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background var(--transition-speed), transform var(--transition-speed);
+  margin-bottom: 1rem;
+}
+
+.ai-data-analysis button:hover {
+  background: #5b52d7;
+  transform: scale(1.03);
+}
+
+.ai-processing {
+  background: var(--bg-highlight);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  min-height: 50px;
+  margin-bottom: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+}
+
+/* Pulsating "Awaiting analysis..." text */
+.awaiting-text {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-style: italic;
+  color: var(--text-muted);
+  animation: pulse 1.5s infinite;
+  font-size: 0.9rem;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.ai-processing p {
+  margin-top: 25px;
+}
+
+/* Summary Grid Styles */
+.ai-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ai-summary-card {
+  background: var(--bg-highlight);
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.ai-summary-card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.ai-summary-card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--text-main);
+}
+
+/* Radar Chart Section: hidden initially and set to 80% width */
+.ai-chart-section {
+  display: none;
+  width: 80%;
+  margin: 0 auto 1rem auto;
+}
+
+/* Recommendation message styling */
+.ai-recommendation {
+  background: var(--bg-highlight);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-style: italic;
+  color: var(--accent-color);
+}

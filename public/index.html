@@ -57,6 +57,14 @@
         <i class="fa-solid fa-calculator"></i>
         <span>Calculations</span>
       </a>
+      <br>
+      <section class="calculations-toggle" id="calculations-toggle">
+        <label class="switch">
+          <input type="checkbox" id="calc-toggle-checkbox" />
+          <span class="slider"></span>
+        </label>
+        <span>Show Calculations</span>
+      </section>
     </nav>
   </aside>
 
@@ -65,7 +73,7 @@
     <!-- Top Bar -->
     <header class="topbar">
       <div class="welcome-text">
-        <h1>Welcome back, <span>User</span>!</h1>
+        <h1>Welcome back, <span>SANJIT</span> <span style="font-family: math; font-size: 11px; opacity: 0.4;">[User Edition]</span></h1> 
         <p>Monitor and analyze your finances in one place.</p>
       </div>
 
@@ -227,8 +235,53 @@
       </div>
     </section>
 
+    <!-- AI Data Analysis Section -->
+<section class="ai-data-analysis" id="ai-data-analysis">
+  <h2>AI Data Analysis</h2>
+  <button id="ai-calc-btn">Run AI Analysis</button>
+  <div class="ai-processing">
+    <span class="awaiting-text">Awaiting analysis...</span>
+    <p id="ai-typewriter"></p>
+  </div>
+  <div class="ai-results">
+    <h3>Analysis Summary</h3>
+    <!-- Summary Metrics Grid -->
+    <div class="ai-summary-grid">
+      <div class="ai-summary-card">
+        <h4>Total Income</h4>
+        <p id="ai-total-income">$0</p>
+      </div>
+      <div class="ai-summary-card">
+        <h4>Total Expenses</h4>
+        <p id="ai-total-expenses">$0</p>
+      </div>
+      <div class="ai-summary-card">
+        <h4>Savings</h4>
+        <p id="ai-savings">$0</p>
+      </div>
+      <div class="ai-summary-card">
+        <h4>Med. Income</h4>
+        <p id="ai-median-income">$0</p>
+      </div>
+      <div class="ai-summary-card">
+        <h4>Med. Expense</h4>
+        <p id="ai-median-expense">$0</p>
+      </div>
+    </div>
+    <!-- Radar Chart Section (initially hidden) -->
+    <div class="ai-chart-section">
+      <canvas id="ai-radar-chart" width="400" height="400"></canvas>
+    </div>
+    <!-- Recommendation Message -->
+    <div class="ai-recommendation">
+      <p id="ai-recommendation-message"></p>
+    </div>
+  </div>
+</section>
+
+
     <!-- New Calculations Section -->
-    <section class="calculations-section" id="calculations-section">
+    <section class="calculations-section" id="calculations-section"  style="display: none;">
       <h2>Expert Financial Calculations</h2>
 
       <!-- IRR Calculator -->
